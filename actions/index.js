@@ -23,5 +23,5 @@ export const deleteDeck = deckId => dispatch => {
 };
 
 export const addCard = card => dispatch => {
-  return addCardToDeck(card).then(card => dispatch({type: ADD_CARD, card}));
+  return addCardToDeck(card).then(() => dispatch({type: ADD_CARD, card}));
 };

@@ -19,10 +19,11 @@ export const saveDeckTitle = deck => {
   return AsyncStorage.mergeItem(KEY, JSON.stringify({[deck.id]: deck}));
 };
 
-export const addCardToDeck = (card, deckId) => {
+export const addCardToDeck = card => {
   return AsyncStorage.getItem(KEY).then(res => {
     const decks = JSON.parse(res);
-    decks[deckId].cards.concat(card);
-    AsyncStorage.setItem(KEY, JSON.stringify(decks));
+    const deck = decks[card.deckId];
+    deck.cards.push(card);
+    AsyncStorage.mergeItem(KEY, JSON.stringify({[deck.id]: deck}));
   });
 };

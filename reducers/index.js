@@ -11,6 +11,7 @@ const decks = (state = {}, action) => {
       delete decks[action.deck.id];
       return {...decks};
     case ADD_CARD:
+      console.log(action);
       return {
         ...state,
         [action.card.deckId]: {

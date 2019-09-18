@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {View} from 'react-native';
 import {TextField, Button} from 'react-native-ui-lib';
 
@@ -7,6 +8,8 @@ import {addCard} from '../actions';
 class NewCardScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    console.log(props.navigation.state);
 
     this.state = {
       deckId: props.navigation.state.params.deckId,
@@ -18,7 +21,7 @@ class NewCardScreen extends React.Component {
   saveCard = () => {
     const {question, answer} = this.state;
     if (question && answer) {
-      addCard(this.state);
+      this.props.dispatch(addCard(this.state));
       return;
     }
     alert('Fill all the fields!');
@@ -45,4 +48,4 @@ class NewCardScreen extends React.Component {
   }
 }
 
-export default NewCardScreen;
+export default connect()(NewCardScreen);

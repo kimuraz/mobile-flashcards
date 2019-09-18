@@ -7,7 +7,7 @@ const DeckListItem = ({deck, navigation}) => (
   <View style={styles.listContainer} height={78}>
     <ListItem
       style={styles.deckList}
-      onPress={() => navigation.navigate('DeckScreen', {deck})}>
+      onPress={() => navigation.navigate('DeckScreen', {deckId: deck.id})}>
       <ListItem.Part left numberOfLines={1}>
         <Text color="#fff">{deck.title}</Text>
 
