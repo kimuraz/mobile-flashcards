@@ -7,12 +7,14 @@ import {
 } from '../utils/storage';
 
 export const loadDecks = () => dispatch => {
-  return getDecks().then(loadedDecks => dispatch({type: LOAD_DECKS, decks}));
+  return getDecks().then(dbDecks => {
+    return dispatch({type: LOAD_DECKS, decks: JSON.parse(dbDecks)});
+  });
 };
 
 export const addDeck = deck => dispatch => {
-  return saveDeckTitle(deck).then(savedDeck =>
-    dispatch({type: ADD_DECK, deck: savedDeck}),
+  return saveDeckTitle(deck).then(() =>
+    dispatch({type: ADD_DECK, deck }),
   );
 };
 

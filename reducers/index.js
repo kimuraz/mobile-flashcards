@@ -1,9 +1,9 @@
 import {LOAD_DECKS, ADD_DECK, DELETE_DECK, ADD_CARD} from '../actions/types';
 
 const decks = (state = {}, action) => {
-  switch (action.types) {
+  switch (action.type) {
     case LOAD_DECKS:
-      return {...decks};
+      return {...action.decks};
     case ADD_DECK:
       return {...state, [action.deck.id]: {...action.deck}};
     case DELETE_DECK:

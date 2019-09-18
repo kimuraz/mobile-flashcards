@@ -3,7 +3,7 @@ import {AsyncStorage} from 'react-native';
 const KEY = '@FLASHCARDS:decks';
 
 export const getDecks = () => {
-  return AsyncStorage.getItem(KEY).then(res => JSON.parse(res));
+  return AsyncStorage.getItem(KEY);
 };
 
 export const removeDeck = id => {

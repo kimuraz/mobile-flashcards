@@ -5,6 +5,8 @@ import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import NewDeckScreen from '../screens/NewDeckScreen';
+import DeckScreen from '../screens/DeckScreen';
+import NewCardScreen from '../screens/NewCardScreen';
 
 const config = Platform.select({
   web: {headerMode: 'screen'},
@@ -15,6 +17,8 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     NewDeck: NewDeckScreen,
+    NewCard: NewCardScreen,
+    DeckScreen: DeckScreen,
   },
   config,
 );

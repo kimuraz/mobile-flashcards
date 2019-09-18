@@ -24,9 +24,9 @@ class NewDeckScreen extends React.Component {
 
     this.props.dispatch(
       addDeck({
-        id: new Date().getMilliseconds(),
+        id: new Date().valueOf(),
         title: deckTitle,
-        questions: [],
+        cards: [],
       }),
     );
     alert('New deck successfully saved!');
