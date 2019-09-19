@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import NewDeckScreen from '../screens/NewDeckScreen';
 import DeckScreen from '../screens/DeckScreen';
 import NewCardScreen from '../screens/NewCardScreen';
+import QuizScreen from '../screens/QuizScreen';
 
 const config = Platform.select({
   web: {headerMode: 'screen'},
@@ -18,7 +19,8 @@ const HomeStack = createStackNavigator(
     Home: HomeScreen,
     NewDeck: NewDeckScreen,
     NewCard: NewCardScreen,
-    DeckScreen: DeckScreen,
+    Quiz: QuizScreen,
+    DeckScreen,
   },
   config,
 );
