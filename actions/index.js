@@ -13,13 +13,13 @@ export const loadDecks = () => dispatch => {
 };
 
 export const addDeck = deck => dispatch => {
-  return saveDeckTitle(deck).then(() =>
-    dispatch({type: ADD_DECK, deck }),
-  );
+  return saveDeckTitle(deck).then(() => {
+    return dispatch({type: ADD_DECK, deck});
+  });
 };
 
 export const deleteDeck = deckId => dispatch => {
-  return deleteDeck().then(() => dispatch({type: DELETE_DECK, deckId}));
+  return removeDeck(deckId).then(() => dispatch({type: DELETE_DECK, deckId}));
 };
 
 export const addCard = card => dispatch => {

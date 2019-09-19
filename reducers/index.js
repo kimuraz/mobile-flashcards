@@ -8,10 +8,9 @@ const decks = (state = {}, action) => {
       return {...state, [action.deck.id]: {...action.deck}};
     case DELETE_DECK:
       const decks = {...state};
-      delete decks[action.deck.id];
+      delete decks[action.deckId];
       return {...decks};
     case ADD_CARD:
-      console.log(action);
       return {
         ...state,
         [action.card.deckId]: {

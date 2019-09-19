@@ -22,15 +22,18 @@ class NewDeckScreen extends React.Component {
       return;
     }
 
-    this.props.dispatch(
-      addDeck({
-        id: new Date().valueOf(),
-        title: deckTitle,
-        cards: [],
-      }),
-    );
-    alert('New deck successfully saved!');
-    this.props.navigation.navigate('Home');
+    const deck = {
+      id: new Date().valueOf(),
+      title: deckTitle,
+      cards: [],
+    };
+
+    this.props.dispatch(addDeck(deck)).then(() => {
+      alert('New deck successfully saved!');
+      this.setState({deckTitle: ''}, () =>
+        this.props.navigation.navigate('DeckScreen', {deckId: deck.id}),
+      );
+    });
   };
 
   render() {
@@ -39,6 +42,7 @@ class NewDeckScreen extends React.Component {
         <TextField
           title="Deck name"
           onChangeText={text => this.setState({deckTitle: text})}
+          value={this.state.deck}
           placeholder="Type the name of your new deck"
         />
         <Button label="Save" onPress={this.saveDeck} />
