@@ -38,7 +38,7 @@ class NewDeckScreen extends React.Component {
 
   render() {
     return (
-      <View flex center padding={20}>
+      <View center padding={20}>
         <TextField
           title="Deck name"
           onChangeText={text => this.setState({deckTitle: text})}

@@ -16,7 +16,7 @@ class DeckScreen extends React.Component {
   render() {
     const {deck, navigation} = this.props;
     return (
-      <View flex center padding={20} style={styles.container}>
+      <View center padding={20} style={styles.container}>
         {!!deck && (
           <>
             <Text style={styles.title}>{deck.title}</Text>

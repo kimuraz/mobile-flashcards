@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withNavigation} from 'react-navigation';
 import {View} from 'react-native';
 import {TextField, Button} from 'react-native-ui-lib';
 
@@ -8,8 +9,6 @@ import {addCard} from '../actions';
 class NewCardScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log(props.navigation.state);
 
     this.state = {
       deckId: props.navigation.state.params.deckId,
@@ -22,6 +21,7 @@ class NewCardScreen extends React.Component {
     const {question, answer} = this.state;
     if (question && answer) {
       this.props.dispatch(addCard(this.state));
+      this.props.navigation.goBack();
       return;
     }
     alert('Fill all the fields!');
@@ -29,7 +29,7 @@ class NewCardScreen extends React.Component {
 
   render() {
     return (
-      <View flex center padding={20}>
+      <View center padding={20}>
         <TextField
           title="Question"
           onChangeText={text => this.setState({question: text})}
@@ -48,4 +48,4 @@ class NewCardScreen extends React.Component {
   }
 }
 
-export default connect()(NewCardScreen);
+export default withNavigation(connect()(NewCardScreen));

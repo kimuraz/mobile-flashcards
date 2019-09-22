@@ -14,8 +14,6 @@ import {
 
 import {loadDecks} from '../actions';
 
-import {MonoText} from '../components/StyledText';
-
 import DeckListItem from '../components/DeckListItem';
 
 const KEY = '@FLASHCARDS:decks';
@@ -30,10 +28,12 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.title}>QuizCards</Text>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
           <FlatList
-            data={Object.values(this.props.decks).sort((d1, d2) => d1.id - d2.id)}
+            data={Object.values(this.props.decks).sort(
+              (d1, d2) => d1.id - d2.id,
+            )}
             renderItem={this.renderDeck}
             keyExtractor={deck => deck.id.toString()}
           />
@@ -52,6 +52,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+  },
+  title: {
+    margin: 20,
+    color: 'rgba(96,100,109, 0.8)',
+    fontSize: 40,
+    textAlign: 'center',
   },
   developmentModeText: {
     marginBottom: 20,

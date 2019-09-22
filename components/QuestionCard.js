@@ -1,16 +1,29 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text, Button} from 'react-native-ui-lib';
+import {StyleSheet} from 'react-native';
+import {Text, Button, Card} from 'react-native-ui-lib';
 
-class QuestionCard extends React.Component {
-  render() {
-    console.log('wth');
-    return (
-      <View flex center>
-        <Text>With opacity</Text>
-      </View>
-    );
-  }
-}
+const QuestionCard = ({card, showAnswer}) => {
+  return (
+    <Card style={styles.card}>
+      <Text style={styles.question}>{card.question}</Text>
+      {showAnswer && <Text style={styles.answer}>Answer: {card.answer}</Text>}
+    </Card>
+  );
+};
+
+const styles = StyleSheet.create({
+  card: {
+    padding: 20,
+  },
+  answer: {
+    fontSize: 20,
+    marginTop: 15,
+    color: '#C6C6C6',
+  },
+  question: {
+    fontSize: 30,
+    color: '#2e78b7',
+  },
+});
 
 export default QuestionCard;
