@@ -59,14 +59,18 @@ class QuizScreen extends React.Component {
     const {
       navigation: {replace},
     } = this.props;
+    const {countCorrect, quizStep} = this.state;
     const {cards} = this.props.navigation.state.params;
-    this.state.quizStep + 1 >= cards.length && replace('EndQuiz');
+    this.state.quizStep >= cards.length &&
+      replace('EndQuiz', {
+        score: ((countCorrect / quizStep) * 100).toFixed(2),
+      });
   };
 
   render() {
     const {navigation} = this.props;
     const {cards} = this.props.navigation.state.params;
-    const {shuffledCards, quizStep, showAnswer} = this.state;
+    const {shuffledCards, quizStep, showAnswer, countCorrect} = this.state;
 
     return (
       <View center padding={20}>
@@ -97,6 +101,11 @@ class QuizScreen extends React.Component {
                   onPress={this._countInconrrect}
                   label="👎 Incorrect"
                 />
+
+                <Text>
+                  Answered: {quizStep} - Correct:{' '}
+                  {(countCorrect / (quizStep + 1 - countCorrect)) * 100} %
+                </Text>
               </>
             )}
           </View>

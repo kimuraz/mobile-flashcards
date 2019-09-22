@@ -10,26 +10,49 @@ import store from './store';
 
 import AppNavigator from './navigation/AppNavigator';
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
+import * as Permissions from 'expo-permissions';
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  } else {
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-      </Provider>
-    );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isLoadingComplete: false,
+    };
+  }
+
+  componentDidMount() {
+    this._notificationsPermission();
+  }
+
+  _notificationsPermission = async () => {
+    const {
+      status: {existingStatus},
+    } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    existingStatus !== 'granted' &&
+      (await Permissions.askAsync(Permissions.NOTIFICATIONS));
+  };
+
+  render() {
+    const {isLoadingComplete} = this.state;
+    if (!isLoadingComplete && !this.props.skipLoadingScreen) {
+      return (
+        <AppLoading
+          startAsync={loadResourcesAsync}
+          onError={handleLoadingError}
+          onFinish={() => this.setState({isLoadingComplete: true})}
+        />
+      );
+    } else {
+      return (
+        <Provider store={store}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+          </View>
+        </Provider>
+      );
+    }
   }
 }
 
@@ -55,13 +78,11 @@ function handleLoadingError(error) {
   console.warn(error);
 }
 
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true);
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
 });
+
+export default App;
